@@ -30,7 +30,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger text-warning" href="#page-top">Nutri App</a>
+      <a class="navbar-brand js-scroll-trigger " href="#page-top">Nutri App</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -55,14 +55,14 @@
 
   <!-- Masthead -->
   <header class="masthead">
-    <div class="container h-100" style="background-image:url('/images/landing.jpg');background-repeat: no-repeat; width:100%;">
+    <div class="container h-100" >
       <div class="row h-100 align-items-center justify-content-center text-center">
         <div class="col-lg-10 align-self-end">
-          <h1 class="text-uppercase text-white font-weight-bold text-warning">LLeva el control de tus pacientes en un solo lugar</h1>
+          <h1 class="text-uppercase text-white font-weight-bold">LLeva el control de tus pacientes en un solo lugar</h1>
           <hr class="divider my-4">
         </div>
         <div class="col-lg-8 align-self-baseline">
-          <p class="text-white-75 font-weight-light mb-5 text-warning">NutriApp te permite optimizar y mejorar los procesos que llevarás como nutriolog@!</p>
+          <p class="text-white-75 font-weight-light mb-5">NutriApp te permite optimizar y mejorar los procesos que llevarás como nutriolog@!</p>
           <a class="btn btn-primary btn-xl js-scroll-trigger" href="{{url('/login')}}">Iniciar sesión</a>
         </div>
       </div>
