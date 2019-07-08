@@ -20,5 +20,9 @@ class RoleSeeder extends Seeder
             'code' => 'pac',
             'name' => 'Paciente'
         ]);
+        Role::create([
+            'code' => 'admin',
+            'name' => 'Administrador'
+        ]);
     }
 }
