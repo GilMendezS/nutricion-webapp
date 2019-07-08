@@ -4,19 +4,21 @@ namespace App;
 
 use App\Role;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     const MAX_PATIENTS = 2;
+        use SoftDeletes;
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -39,7 +41,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function getPacients(){
-        return $this->hasMany(User::class, 'creator_id', 'id')->where('creator_id', $this->id);
+        return $this->hasMany(User::class, 'creator_id', 'id');
     }
     public function canRegisterMorePatients(){
         return count($this->getPacients) < self::MAX_PATIENTS;
@@ -47,7 +49,7 @@ class User extends Authenticatable
     public function becomesPatient(){
         return $this->roles()->attach(Role::PATIENT);
     }
-    public function becomesNutrioligist(){
+    public function becomesNutriologist(){
         return $this->roles()->attach(ROle::NUTRIOLOGIST);
     }
     public function hasRole($role){
