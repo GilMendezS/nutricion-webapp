@@ -124,7 +124,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            DB::begindTransaction();
+            DB::beginTransaction();
             $user = User::findOrFail($id);
             $user->udpate($request->all());
             DB::commit();
