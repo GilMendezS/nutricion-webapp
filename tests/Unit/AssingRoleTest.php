@@ -17,7 +17,7 @@ class AssingRole extends TestCase
     public function testBecomesNutriologistTest()
     {
         $user = User::find(1);
-        $result = $user->becomesNutrioligist();
+        $result = $user->becomesNutriologist();
         $this->assertTrue($user->hasRole(Role::NUTRIOLOGIST));
     }
     /**
