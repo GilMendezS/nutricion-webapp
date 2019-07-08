@@ -10,12 +10,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+    const MAX_PATIENTS = 2;
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -39,6 +40,9 @@ class User extends Authenticatable
     ];
     public function getPacients(){
         return $this->hasMany(User::class, 'creator_id', 'id')->where('creator_id', $this->id);
+    }
+    public function canRegisterMorePatients(){
+        return count($this->getPacients) < self::MAX_PATIENTS;
     }
     public function becomesPatient(){
         return $this->roles()->attach(Role::PATIENT);
