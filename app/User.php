@@ -61,4 +61,7 @@ class User extends Authenticatable
     public function roles(){
         return $this->belongsToMany(Role::class);
     }
+    public function nutriologist(){
+        return $this->belongsTo(User::class, 'creator_id');
+    }
 }

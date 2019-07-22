@@ -6,8 +6,13 @@ use Auth;
 use App\User;
 use Illumininate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\UserResource;
 use App\Http\Controllers\Controller;
-
+/**
+* @OA\Info(title="User Resource", version="1.0")
+*
+* @OA\Server(url="http://localhost:8000")
+*/
 class UserController extends Controller
 {
     /**
@@ -15,10 +20,24 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /**
+    * @OA\Get(
+    *     path="/api/users",
+    *     summary="List users",
+    *     @OA\Response(
+    *         response=200,
+    *         description="List all users registered."
+    *     ),
+    *     @OA\Response(
+    *         response="500",
+    *         description="Server error."
+    *     )
+    * )
+    */
     public function index()
     {
-        $users = User::all();
-        return response()->json(['data' => $users], 200);
+        $data = UserResource::collection(User::with(['roles','nutriologist'])->get());
+        return response()->json(['data' => $data], 200);
     }
      /**
      * Display a listing of the resource. - patients of nutriologist
@@ -26,7 +45,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function ownUsers(){
-        $users = Auth::user()->getPacients();
+        $patients = UserResource::collection(request()->user()->getPacients());
         return response()->json(['data' => $users], 200);
     }
     /**
