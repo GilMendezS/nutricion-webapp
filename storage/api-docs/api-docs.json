@@ -23,6 +23,23 @@
                     }
                 }
             }
+        },
+        "/api/users/mypatients": {
+            "get": {
+                "tags": [
+                    "USers"
+                ],
+                "summary": "GEt List of patients",
+                "operationId": "ownUsers",
+                "responses": {
+                    "200": {
+                        "description": "List all patients by user."
+                    },
+                    "500": {
+                        "description": "Server error."
+                    }
+                }
+            }
         }
     }
 }

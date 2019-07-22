@@ -44,6 +44,22 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /**
+    * @OA\Get(
+    *     path="/api/users/mypatients",
+    *     tags={"USers"},
+    *     operationId="ownUsers",
+    *     summary="GEt List of patients",
+    *     @OA\Response(
+    *         response=200,
+    *         description="List all patients by user."
+    *     ),
+    *     @OA\Response(
+    *         response="500",
+    *         description="Server error."
+    *     )
+    * )
+    */
     public function ownUsers(){
         $patients = UserResource::collection(request()->user()->getPacients());
         return response()->json(['data' => $users], 200);
@@ -91,7 +107,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function storePatient(Request $request){
-        $currentUser = Auth::user();
+        $currentUser = request()->user();
         try {
             DB::begintTransaction();
             $newPatient = User::create([
@@ -117,8 +133,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id)->with(['roles']);
-        return response()->json(['data' => $user]);
+        $user = new UserResource(User::find($id)->with(['roles','nutriologist'])->first());
+        return response()->json($user, 200);
 
     }
 
