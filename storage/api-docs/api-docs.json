@@ -1,0 +1,28 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "User Resource",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/users": {
+            "get": {
+                "summary": "List users",
+                "operationId": "App\\Http\\Controllers\\Api\\UserController::index",
+                "responses": {
+                    "200": {
+                        "description": "List all users registered."
+                    },
+                    "500": {
+                        "description": "Server error."
+                    }
+                }
+            }
+        }
+    }
+}
